@@ -1,156 +1,197 @@
-"use client";
+import clsx from "clsx";
+const cn = clsx;
+import { IconLayoutNavbarCollapse } from "@tabler/icons-react";
+import {
+  AnimatePresence,
+  MotionValue,
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import { useRef, useState } from "react";
 
-import { cn } from "../../utils/cn";
-
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-
-const MouseEnterContext = createContext<
-  [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
->(undefined);
-
-export const CardContainer = ({
-  children,
-  className,
-  containerClassName,
+export const FloatingDock = ({
+  items,
+  desktopClassName,
+  mobileClassName,
 }: {
-  children?: React.ReactNode;
-  className?: string;
-  containerClassName?: string;
+  items: { title: string; icon: React.ReactNode; href: string }[];
+  desktopClassName?: string;
+  mobileClassName?: string;
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [isMouseEntered, setIsMouseEntered] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const { left, top, width, height } =
-      containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - left - width / 2) / 25;
-    const y = (e.clientY - top - height / 2) / 25;
-    containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-  };
-
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    console.log(e);
-    setIsMouseEntered(true);
-    if (!containerRef.current) return;
-  };
-
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    console.log(e);
-    if (!containerRef.current) return;
-    setIsMouseEntered(false);
-    containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
-  };
   return (
-    <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
-      <div
-        className={cn(
-          "py-20 flex items-center justify-center",
-          containerClassName
-        )}
-        style={{
-          perspective: "1000px",
-        }}
-      >
-        <div
-          ref={containerRef}
-          onMouseEnter={handleMouseEnter}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-          className={cn(
-            "flex items-center justify-center relative transition-all duration-200 ease-linear",
-            className
-          )}
-          style={{
-            transformStyle: "preserve-3d",
-          }}
-        >
-          {children}
-        </div>
-      </div>
-    </MouseEnterContext.Provider>
+    <>
+      <FloatingDockDesktop items={items} className={desktopClassName} />
+      <FloatingDockMobile items={items} className={mobileClassName} />
+    </>
   );
 };
 
-export const CardBody = ({
-  children,
+const FloatingDockMobile = ({
+  items,
   className,
 }: {
-  children: React.ReactNode;
+  items: { title: string; icon: React.ReactNode; href: string }[];
   className?: string;
 }) => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div
-      className={cn(
-        "h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
-        className
-      )}
-    >
-      {children}
+    <div className={cn("relative block md:hidden mb-4", className)}>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            layoutId="nav"
+            className="absolute bottom-full mt-2 inset-x-0 flex flex-row justify-center items-center gap-2 z-50"
+          >
+            {items.map((item, idx) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{
+                  opacity: 1,
+                  x: 0,
+                }}
+                exit={{
+                  opacity: 0,
+                  x: -10,
+                  transition: {
+                    delay: idx * 0.05,
+                  },
+                }}
+                transition={{ delay: (items.length - 1 - idx) * 0.05 }}
+              >
+                <a
+                  href={item.href}
+                  className="h-8 w-8 rounded-full bg-neutral-900 flex items-center justify-center"
+                >
+                  <div className="h-4 w-4">{item.icon}</div>
+                </a>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <button
+        onClick={() => setOpen(!open)}
+        className="h-10 w-10 rounded-full bg-neutral-800 flex items-center justify-center"
+      >
+        <IconLayoutNavbarCollapse className="h-5 w-5 text-neutral-400" />
+      </button>
     </div>
   );
 };
 
-export const CardItem = ({
-  as: Tag = "div",
-  children,
+const FloatingDockDesktop = ({
+  items,
   className,
-  translateX = 0,
-  translateY = 0,
-  translateZ = 0,
-  rotateX = 0,
-  rotateY = 0,
-  rotateZ = 0,
-  ...rest
 }: {
-  as?: React.ElementType;
-  children: React.ReactNode;
+  items: { title: string; icon: React.ReactNode; href: string }[];
   className?: string;
-  translateX?: number | string;
-  translateY?: number | string;
-  translateZ?: number | string;
-  rotateX?: number | string;
-  rotateY?: number | string;
-  rotateZ?: number | string;
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isMouseEntered] = useMouseEnter();
-
-  useEffect(() => {
-    handleAnimations();
-  }, [isMouseEntered]);
-
-  const handleAnimations = () => {
-    if (!ref.current) return;
-    if (isMouseEntered) {
-      ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
-    } else {
-      ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
-    }
-  };
-
+  let mouseX = useMotionValue(Infinity);
   return (
-    <Tag
-      ref={ref}
-      className={cn("w-fit transition duration-200 ease-linear", className)}
-      {...rest}
+    <motion.div
+      onMouseMove={(e) => mouseX.set(e.pageX)}
+      onMouseLeave={() => mouseX.set(Infinity)}
+      className={cn(
+        "mx-auto hidden md:flex h-16 gap-4 items-end  rounded-2xl bg-neutral-900 px-4 pb-3",
+        className
+      )}
     >
-      {children}
-    </Tag>
+      {items.map((item) => (
+        <IconContainer mouseX={mouseX} key={item.title} {...item} />
+      ))}
+    </motion.div>
   );
 };
 
-// Create a hook to use the context
-export const useMouseEnter = () => {
-  const context = useContext(MouseEnterContext);
-  if (context === undefined) {
-    throw new Error("useMouseEnter must be used within a MouseEnterProvider");
-  }
-  return context;
-};
+function IconContainer({
+  mouseX,
+  title,
+  icon,
+  href,
+}: {
+  mouseX: MotionValue;
+  title: string;
+  icon: React.ReactNode;
+  href: string;
+}) {
+  let ref = useRef<HTMLDivElement>(null);
+
+  let distance = useTransform(mouseX, (val) => {
+    let bounds = ref.current?.getBoundingClientRect() ?? { x: 0, width: 0 };
+
+    return val - bounds.x - bounds.width / 2;
+  });
+
+  let widthTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
+  let heightTransform = useTransform(distance, [-150, 0, 150], [40, 80, 40]);
+
+  let widthTransformIcon = useTransform(distance, [-150, 0, 150], [25, 35, 25]);
+  let heightTransformIcon = useTransform(
+    distance,
+    [-150, 0, 150],
+    [25, 35, 25]
+  );
+
+  let width = useSpring(widthTransform, {
+    mass: 0.1,
+    stiffness: 150,
+    damping: 12,
+  });
+  let height = useSpring(heightTransform, {
+    mass: 0.1,
+    stiffness: 150,
+    damping: 12,
+  });
+
+  let widthIcon = useSpring(widthTransformIcon, {
+    mass: 0.1,
+    stiffness: 150,
+    damping: 12,
+  });
+  let heightIcon = useSpring(heightTransformIcon, {
+    mass: 0.1,
+    stiffness: 150,
+    damping: 12,
+  });
+
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <a href={href}>
+      <motion.div
+        ref={ref}
+        style={{ width, height }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        className="aspect-square rounded-full bg-neutral-800 flex items-center justify-center relative"
+      >
+        <AnimatePresence>
+          {hovered && (
+            <motion.div
+              initial={{ opacity: 0, y: 10, x: "-50%" }}
+              animate={{ opacity: 1, y: 0, x: "-50%" }}
+              exit={{ opacity: 0, y: 2, x: "-50%" }}
+              className="px-2 py-0.5 whitespace-pre rounded-md bg-neutral-800 border-neutral-900 text-white absolute left-1/2 -translate-x-1/2 -top-8 w-fit text-xs"
+              style={{
+                top: "70px",
+              }}
+            >
+              {title}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <motion.div
+          style={{ width: widthIcon, height: heightIcon }}
+          className="flex items-center justify-center"
+        >
+          {icon}
+        </motion.div>
+      </motion.div>
+    </a>
+  );
+}

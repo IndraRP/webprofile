@@ -1,57 +1,82 @@
-"use client";
+import { useState } from "react";
+import {
+  IconBrandLinkedin,
+  IconBrandHipchat,
+  IconBriefcase,
+  IconHome,
+  IconCertificate,
+  IconDeviceIpadHorizontalCog,
+} from "@tabler/icons-react";
+import { FloatingDock } from "./ui/3d-card";
 
-import { CardBody, CardContainer, CardItem } from "../components/ui/3d-card";
+export function FloatingDockDemo() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-export function ThreeDCardDemo() {
+  // Fungsi untuk membuka modal
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // Fungsi untuk menutup modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const links = [
+    {
+      title: "Home",
+      icon: (
+        <IconHome className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
+      href: "#home-section",
+    },
+    {
+      title: "Skills",
+      icon: (
+        <IconDeviceIpadHorizontalCog className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
+      href: "#skills-section",
+    },
+    {
+      title: "Achievment",
+      icon: (
+        <IconCertificate className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
+      href: "#achievment-section",
+    },
+    {
+      title: "Project",
+      icon: (
+        <IconBriefcase className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
+      href: "#project-section",
+    },
+    {
+      title: "Chat",
+      icon: (
+        <IconBrandHipchat className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
+      href: "https://wa.me/6282131211769",
+      onClick: openModal, // Pastikan event onClick ada di sini
+    },
+    {
+      title: "Linkedin",
+      icon: (
+        <IconBrandLinkedin className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+      ),
+      href: "https://www.linkedin.com/in/indra-ridho-rizkian-pratama-298800341/",
+    },
+  ];
+
   return (
-    <CardContainer className="inter-var">
-      <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
-        <CardItem
-          translateZ="50"
-          className="text-xl font-bold text-neutral-600 dark:text-white"
-        >
-          Make things float in air
-        </CardItem>
-        <CardItem
-          as="p"
-          translateZ="60"
-          className="text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300"
-        >
-          Hover over this card to unleash the power of CSS perspective
-        </CardItem>
-        <CardItem
-          translateZ="100"
-          rotateX={20}
-          rotateZ={-10}
-          className="w-full mt-4"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            height="1000"
-            width="1000"
-            className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl"
-            alt="thumbnail"
-          />
-        </CardItem>
-        <div className="flex justify-between items-center mt-20">
-          <CardItem
-            translateZ={20}
-            translateX={-40}
-            as="button"
-            className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
-          >
-            Try now →
-          </CardItem>
-          <CardItem
-            translateZ={20}
-            translateX={40}
-            as="button"
-            className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
-          >
-            Sign up
-          </CardItem>
-        </div>
-      </CardBody>
-    </CardContainer>
+    <div className="flex items-center justify-center w-full lg:mt-12">
+      <FloatingDock
+        mobileClassName="translate-y-20"
+        items={links.map((link) => ({
+          ...link,
+          onClick: link.onClick || (() => {}), // Pastikan event tetap ada di semua item
+        }))}
+      />
+    </div>
   );
 }

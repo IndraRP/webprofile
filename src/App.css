@@ -40,3 +40,126 @@
 .read-the-docs {
   color: #888;
 }
+
+.btn-4 {
+  --width: 150px;
+  --height: 45px;
+  --tooltip-height: 30px;
+  --tooltip-width: 70px;
+  --gap-between-tooltip-to-button: 5px;
+  --button-color: #ffffff;
+  --tooltip-color: #a3f9ff;
+  width: var(--width);
+  height: var(--height);
+  background: var(--button-color);
+  position: relative;
+  text-align: center;
+  border-radius: 50px;
+  border: 1px solid #000;
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-4::before {
+  position: absolute;
+  content: attr(data-tooltip);
+  width: var(--tooltip-width);
+  height: var(--tooltip-height);
+  background-color: var(--tooltip-color);
+  font-size: 10px;
+  color: #111;
+  border-radius: 6px;
+  line-height: var(--tooltip-height);
+  bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) + 20px);
+  left: calc(50% - var(--tooltip-width) / 2);
+}
+
+.btn-4::after,
+.btn-4::before {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.5s;
+}
+
+.btn-4 .text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-4 .button-wrapper,
+.btn-4 .text,
+.btn-4 .icon {
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  color: #000000;
+}
+
+.btn-4 .text {
+  top: 0;
+}
+
+.btn-4 .text,
+.btn-4 .icon {
+  transition: top 0.5s;
+}
+
+.btn-4 .icon {
+  color: #fff;
+  top: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-4 .icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.btn-4:hover {
+  background: linear-gradient(
+    to bottom right,
+    #3b82f6,
+    /* Blue-500 */ #06b6d4,
+    /* Cyan-500 */ #ffffff /* White-500 */
+  );
+}
+
+.btn-4:hover .text {
+  top: -100%;
+}
+
+.btn-4:hover .icon {
+  top: 0;
+}
+
+.btn-4:hover:before,
+.btn-4:hover:after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.btn-4:hover:after {
+  bottom: calc(var(--height) + var(--gap-between-tooltip-to-button) - 20px);
+}
+
+.btn-4:hover:before {
+  bottom: calc(var(--height) + var(--gap-between-tooltip-to-button));
+}
+
+.download-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  text-decoration: none;
+}

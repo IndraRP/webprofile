@@ -1,16 +1,27 @@
 import "./App.css";
-import { ThreeDCardDemo } from "./components/3d-Comp";
-import { SparklesPreview } from "./components/product";
+import { AnimatedTestimonialsDemo } from "./components/animated-testimonials";
+import { FloatingDockDemo } from "./components/3d-Comp";
+import Skills from "./components/skills";
+import Achievment from "./components/achievment";
+import { Hero } from "./components/hero";
+import Project from "./components/project";
+import Footer from "./components/footer";
+import { TextHoverEffectDemo } from "./components/text";
+import { GlobeDemo } from "./components/globe";
 
 function App() {
   return (
-    <section>
-      <ThreeDCardDemo />
-      <div>
-        <h1 className="text-3xl">It's my new components</h1>
-        <SparklesPreview />
-      </div>
-    </section>
+    <div>
+      <FloatingDockDemo />
+      <AnimatedTestimonialsDemo />
+      <TextHoverEffectDemo />
+      <Skills />
+      <Achievment />
+      <Hero />
+      <Project />
+      <GlobeDemo />
+      <Footer />
+    </div>
   );
 }
 
