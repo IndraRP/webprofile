@@ -25,7 +25,7 @@ const footer = () => {
                 </a>
 
                 <a
-                  href="#portofolio-section"
+                  href="#achievment-section"
                   className="mx-4 lg:text-sm text-xs text-gray-100 transition-colors duration-300 hover:text-blue-500"
                   aria-label="Reddit"
                 >
@@ -34,7 +34,7 @@ const footer = () => {
                 </a>
 
                 <a
-                  href="#sertif-section"
+                  href="#project-section"
                   className="mx-4 lg:text-sm text-xs text-gray-100 transition-colors duration-300 hover:text-blue-500"
                   aria-label="Reddit"
                 >

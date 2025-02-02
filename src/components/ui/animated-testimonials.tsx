@@ -1,6 +1,7 @@
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import CvIndra from "../image/CV Indra Ridho.pdf";
 
 type Testimonial = {
   quote: string;
@@ -186,11 +187,11 @@ const AnimatedTestimonials = ({
                   </span>
                 </div>
                 <a
-                  href={""}
+                  href={CvIndra}
                   download="CV Indra Ridho R.P.pdf"
                   className="download-link"
                 >
-                  {" "}
+                  {}
                 </a>
               </div>
             </div>
