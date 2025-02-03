@@ -1,7 +1,7 @@
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import CvIndra from "../image/CV Indra Ridho.pdf";
+import CvIndra from "../image/CV Indra Ridho R.P.pdf";
 
 type Testimonial = {
   quote: string;
