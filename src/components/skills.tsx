@@ -8,7 +8,7 @@ const Skills = () => {
   return (
     <section id="skills-section" className="relative pb-10 pt-16">
       {/* Section Content */}
-      <div className="container">
+      <div className="container mx-auto">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}

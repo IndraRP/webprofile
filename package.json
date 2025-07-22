@@ -19,6 +19,7 @@
     "@tsparticles/slim": "^3.2.2",
     "clsx": "^2.1.0",
     "framer-motion": "^11.18.2",
+    "matter-js": "^0.20.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-intersection-observer": "^9.15.1",
@@ -29,6 +30,7 @@
     "three-globe": "^2.41.5"
   },
   "devDependencies": {
+    "@types/matter-js": "^0.19.8",
     "@types/node": "^22.10.10",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",

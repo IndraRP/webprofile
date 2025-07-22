@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+        {
+            "source": "/webprofile/(.*)",
+            "destination": "/webprofile/index.html"
+        }
+    ]
+}

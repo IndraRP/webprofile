@@ -6,7 +6,7 @@ import Foto4 from "./image/uwp.jpg";
 
 const achievment = () => {
   return (
-    <div>
+    <div className="flex justify-center">
       {/* PORTOFOLIO */}
       <section id="achievment-section" className="relative pb-10 pt-16">
         <div className="container py-10">

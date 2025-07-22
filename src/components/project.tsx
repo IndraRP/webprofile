@@ -5,12 +5,10 @@ import { useInView } from "react-intersection-observer";
 const Project = () => {
   return (
     <div>
-      <section id="project-section" className="text-white mt-20">
-        <div className="container py-10">
-          <h1 className="text-2xl font-bold text-center capitalize lg:text-3xl">
-            Project
-          </h1>
-          <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 lg:gap-4 lg:grid-cols-3">
+      <section id="project-section" className="text-white">
+        <div className="container mx-auto pb-10 pt-1">
+          <h1 className="font-bold text-3xl">This is My Project</h1>
+          <div className="grid grid-cols-1 gap-8 mt-4 xl:mt-8 lg:gap-4 lg:grid-cols-3">
             {data.map((data, index) => (
               <ProjectCard key={index} data={data} />
             ))}

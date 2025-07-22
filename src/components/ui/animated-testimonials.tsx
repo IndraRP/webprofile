@@ -44,7 +44,7 @@ const AnimatedTestimonials = ({
 
   return (
     <section id="home-section">
-      <div className="max-w-sm md:max-w-5xl mx-auto antialiased font-sans px-4 md:px-8 lg:px-4 py-20">
+      <div className="max-w-sm md:max-w-5xl mx-auto antialiased px-4 md:px-8 lg:px-4 py-20">
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-20">
           <div>
             <div className="relative h-48 w-full sm:h-64 sm:w-64 md:h-80 md:w-80 lg:h-96 lg:w-96 px-1">
@@ -55,23 +55,23 @@ const AnimatedTestimonials = ({
                     initial={{
                       opacity: 0,
                       scale: 0.9,
-                      z: -100,
+                      z: -10,
                       rotate: randomRotateY(),
                     }}
                     animate={{
                       opacity: isActive(index) ? 1 : 0.7,
                       scale: isActive(index) ? 1 : 0.95,
-                      z: isActive(index) ? 0 : -100,
+                      z: isActive(index) ? 0 : -10,
                       rotate: isActive(index) ? 0 : randomRotateY(),
                       zIndex: isActive(index)
-                        ? 999
+                        ? 99
                         : testimonials.length + 2 - index,
                       y: isActive(index) ? [0, -80, 0] : 0,
                     }}
                     exit={{
                       opacity: 0,
                       scale: 0.9,
-                      z: 100,
+                      z: 10,
                       rotate: randomRotateY(),
                     }}
                     transition={{

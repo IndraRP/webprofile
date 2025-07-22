@@ -36,49 +36,53 @@ const FloatingDockMobile = ({
   className?: string;
 }) => {
   const [open, setOpen] = useState(false);
-
   return (
-    <div className={cn("relative block md:hidden mb-4", className)}>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            layoutId="nav"
-            className="absolute bottom-full mt-2 inset-x-0 flex flex-row justify-center items-center gap-2 z-50"
-          >
-            {items.map((item, idx) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{
-                  opacity: 1,
-                  x: 0,
-                }}
-                exit={{
-                  opacity: 0,
-                  x: -10,
-                  transition: {
-                    delay: idx * 0.05,
-                  },
-                }}
-                transition={{ delay: (items.length - 1 - idx) * 0.05 }}
-              >
-                <a
-                  href={item.href}
-                  className="h-8 w-8 rounded-full bg-neutral-900 flex items-center justify-center"
+    <div className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-2 bg-neutral-900 z-[999]">
+      {/* Nama di kiri */}
+      <div className="text-white text-lg font-semibold block md:hidden">
+        Indra
+      </div>
+
+      {/* Tombol dan Menu di Mobile */}
+      <div className={cn("relative block md:hidden translate-y-0")}>
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              layoutId="nav"
+              className="absolute top-12 right-0 flex flex-row gap-2 bg-white p-2 rounded-xl shadow-lg z-[999]"
+            >
+              {items.map((item, idx) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{
+                    opacity: 0,
+                    x: -10,
+                    transition: { delay: idx * 0.05 },
+                  }}
+                  transition={{ delay: (items.length - 1 - idx) * 0.05 }}
                 >
-                  <div className="h-4 w-4">{item.icon}</div>
-                </a>
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <button
-        onClick={() => setOpen(!open)}
-        className="h-10 w-10 rounded-full bg-neutral-800 flex items-center justify-center"
-      >
-        <IconLayoutNavbarCollapse className="h-5 w-5 text-neutral-400" />
-      </button>
+                  <a
+                    href={item.href}
+                    className="h-10 w-10 rounded-full bg-neutral-900 flex items-center justify-center text-white hover:bg-neutral-700 transition"
+                  >
+                    <div className="h-5 w-5">{item.icon}</div>
+                  </a>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Tombol trigger */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="h-10 w-10 rounded-full bg-neutral-800 flex items-center justify-center hover:bg-neutral-700 transition"
+        >
+          <IconLayoutNavbarCollapse className="h-5 w-5 text-white" />
+        </button>
+      </div>
     </div>
   );
 };
