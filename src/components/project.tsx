@@ -1,48 +1,110 @@
-import { data } from "./data";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { data as projects } from "./data";
 
 const Project = () => {
+  // Menyimpan index project yang sedang dibuka
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggleProject = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index); // Tutup jika sama
+  };
+
   return (
-    <div>
-      <section id="project-section" className="text-white">
-        <div className="container mx-auto pb-10 pt-1">
-          <h1 className="font-bold text-3xl">This is My Project</h1>
-          <div className="grid grid-cols-1 gap-8 mt-4 xl:mt-8 lg:gap-4 lg:grid-cols-3">
-            {data.map((data, index) => (
-              <ProjectCard key={index} data={data} />
-            ))}
-          </div>
+    <section
+      id="project-section"
+      className="text-gray-100 min-h-screen px-6 py-10"
+    >
+      <div className="container mx-auto">
+        <h1 className="font-bold text-3xl mb-8 text-center text-white">
+          💻 My Projects
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {projects.map((item, index) => (
+            <ProjectDropdown
+              key={index}
+              item={item}
+              isOpen={openIndex === index}
+              onToggle={() => toggleProject(index)}
+            />
+          ))}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 
-const ProjectCard = ({ data }) => {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+interface ProjectItem {
+  title: string;
+  url: string;
+  [key: string]: string;
+}
+
+interface ProjectDropdownProps {
+  item: ProjectItem;
+  isOpen: boolean;
+  onToggle: () => void;
+}
+
+const ProjectDropdown = ({ item, isOpen, onToggle }: ProjectDropdownProps) => {
+  const frameworks = Object.keys(item)
+    .filter((key) => key.toLowerCase().startsWith("framework"))
+    .map((key) => item[key]);
 
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="flex items-end bg-gray-200 overflow-hidden bg-cover rounded-lg h-72"
-      style={{ backgroundImage: `url('${data.background}')` }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      viewport={{ once: true }}
+      className="border border-gray-700 rounded-lg overflow-hidden bg-[#161b22] shadow-lg hover:shadow-cyan-900/40 transition-all"
     >
-      <div className="w-full px-2 text-center py-4 overflow-hidden rounded-b-lg backdrop-blur-lg bg-white/60">
-        <a href={data.url}>
-          <h2 className="mt-1 mb-1 text-md font-semibold text-gray-800 capitalize">
-            {data.title}
-          </h2>
-        </a>
-        <div className="flex justify-center space-x-4 mb-2">
-          <img src={data.icon1} alt="Icon 1" className="w-6 h-6" />
-          <img src={data.icon2} alt="Icon 2" className="w-6 h-6" />
-          <img src={data.icon3} alt="Icon 3" className="w-6 h-6" />
-        </div>
-      </div>
+      <button
+        onClick={onToggle}
+        className={`w-full flex justify-between items-center px-4 py-4 text-left transition-colors ${
+          isOpen ? "bg-[#1c2128]" : "hover:bg-[#21262d]"
+        }`}
+      >
+        <span className="font-semibold text-gray-100 text-lg">
+          {item.title}
+        </span>
+        <motion.span
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="text-gray-400 text-lg"
+        >
+          ▼
+        </motion.span>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="px-5 py-4 border-t border-gray-700 bg-[#1c2128]"
+          >
+            <ul className="space-y-2 text-sm text-gray-300">
+              {frameworks.map((fw, i) => (
+                <li key={i}>• {fw}</li>
+              ))}
+            </ul>
+
+            {item.url && (
+              <a
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block mt-4 text-cyan-400 hover:text-cyan-300 hover:underline transition-colors"
+              >
+                🔗 View Project
+              </a>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };

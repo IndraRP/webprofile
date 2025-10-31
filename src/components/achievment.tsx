@@ -16,7 +16,7 @@ const achievment = () => {
             transition={{ duration: 0.6 }}
             className="text-2xl font-bold text-center text-gray-100 capitalize lg:text-3xl"
           >
-            Achievement
+            Experience
           </motion.h1>
 
           <motion.p

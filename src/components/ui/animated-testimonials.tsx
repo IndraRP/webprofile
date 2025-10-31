@@ -44,7 +44,7 @@ const AnimatedTestimonials = ({
 
   return (
     <section id="home-section">
-      <div className="max-w-sm md:max-w-5xl mx-auto antialiased px-4 md:px-8 lg:px-4 py-20">
+      <div className="max-w-sm md:max-w-5xl mx-auto antialiased px-4 md:px-8 lg:px-4 py-20 mt-20">
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-20">
           <div>
             <div className="relative h-48 w-full sm:h-64 sm:w-64 md:h-80 md:w-80 lg:h-96 lg:w-96 px-1">

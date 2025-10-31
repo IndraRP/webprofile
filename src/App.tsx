@@ -8,20 +8,26 @@ import Project from "./components/project";
 import Footer from "./components/footer";
 import { TextHoverEffectDemo } from "./components/text";
 import { GlobeDemo } from "./components/globe";
+import RocketScrollTop from "./components/RocketScrollTop";
+import InteractiveCursor from "./components/InteractiveCursor";
 
 function App() {
   return (
-    <div>
-      <FloatingDockDemo />
-      <AnimatedTestimonialsDemo />
-      <TextHoverEffectDemo />
-      <Skills />
-      <Achievment />
-      <Hero />
-      <Project />
-      <GlobeDemo />
-      <Footer />
-    </div>
+    <>
+      <InteractiveCursor />
+      <div>
+        <FloatingDockDemo />
+        <AnimatedTestimonialsDemo />
+        <TextHoverEffectDemo />
+        <Skills />
+        <Achievment />
+        <Hero />
+        <Project />
+        <GlobeDemo />
+        <Footer />
+        <RocketScrollTop />
+      </div>
+    </>
   );
 }
 
