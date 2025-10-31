@@ -10,6 +10,7 @@ import { TextHoverEffectDemo } from "./components/text";
 import { GlobeDemo } from "./components/globe";
 import RocketScrollTop from "./components/RocketScrollTop";
 import InteractiveCursor from "./components/InteractiveCursor";
+import ChatBox from "./components/Chatbox";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <GlobeDemo />
         <Footer />
         <RocketScrollTop />
+        <ChatBox />
       </div>
     </>
   );

@@ -46,7 +46,7 @@ const RocketScrollTop: React.FC = () => {
         repeat: shake ? Infinity : 0,
         ease: "easeInOut",
       }}
-      className="fixed bottom-6 right-6 z-50"
+      className="fixed bottom-6 right-12 z-50"
     >
       <AnimatePresence>
         {visible && (
