@@ -16,7 +16,7 @@ export default defineConfig({
       manifest: {
         name: "Your App Name",
         short_name: "App",
-        start_url: "/webprofile/",
+        start_url: "/",
         display: "standalone",
         background_color: "#ffffff",
         theme_color: "#ffffff",
@@ -38,5 +38,5 @@ export default defineConfig({
       },
     }),
   ],
-  base: "/webprofile/",
+  base: "/",
 });
