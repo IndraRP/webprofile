@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   IconBrandLinkedin,
-  IconBrandHipchat,
+  IconTimeline,
   IconBriefcase,
   IconHome,
   IconCertificate,
@@ -34,9 +34,9 @@ export function FloatingDockDemo() {
       href: "#project-section",
     },
     {
-      title: "Chat",
-      icon: <IconBrandHipchat size={24} />,
-      href: "https://wa.me/6282131211769",
+      title: "Flow",
+      icon: <IconTimeline size={24} />,
+      href: "#flow-section",
     },
     {
       title: "LinkedIn",

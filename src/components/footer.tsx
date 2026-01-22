@@ -25,6 +25,15 @@ const footer = () => {
                 </a>
 
                 <a
+                  href="#flow-section"
+                  className="mx-4 lg:text-sm text-xs text-gray-100 transition-colors duration-300 hover:text-blue-500"
+                  aria-label="Reddit"
+                >
+                  {" "}
+                  Flow{" "}
+                </a>
+
+                <a
                   href="#achievment-section"
                   className="mx-4 lg:text-sm text-xs text-gray-100 transition-colors duration-300 hover:text-blue-500"
                   aria-label="Reddit"

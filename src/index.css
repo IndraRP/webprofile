@@ -5,3 +5,37 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+
+/* ===== Custom horizontal scrollbar (dark elegant) ===== */
+
+.custom-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #22d3ee #020617; /* thumb track */
+}
+
+/* Chrome, Edge, Safari */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #020617;
+  border-radius: 999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    90deg,
+    rgba(34, 211, 238, 0.8),
+    rgba(56, 189, 248, 0.8)
+  );
+  border-radius: 999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(34, 211, 238, 1),
+    rgba(56, 189, 248, 1)
+  );
+}

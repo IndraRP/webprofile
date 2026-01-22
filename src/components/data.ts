@@ -227,4 +227,100 @@ export const data = [
     Framework3: "PWA",
     url: "https://github.com/IndraRP/Flickora",
   },
+  {
+    title: "Management Gudang",
+    Framework1: "Laravel",
+    Framework2: "Bootstrap",
+    Framework3: "Livewire",
+    url: "https://github.com/IndraRP/ScanLogistik",
+  },
+];
+
+export const flow = [
+  {
+    year: "2022",
+    title: "SMK Telkom Malang",
+    Framework1: "Java",
+    Framework2: "Php",
+    Framework3: "Basic Web",
+    Framework4: "Programming Logic",
+    description:
+      "First introduction to web development and programming fundamentals using Java.",
+  },
+  {
+    year: "2023",
+    title: "Frontend & UI/UX Journey",
+    Framework1: "Node.js",
+    Framework2: "React",
+    Framework3: "Tailwind & Bootstrap",
+    Framework4: "UI / UX",
+    description:
+      "Started building interactive web interfaces and understanding user-centered design.",
+  },
+  {
+    year: "2024 - 2025",
+    title: "Advanced Backend & Fullstack",
+    Framework1: "Django",
+    Framework2: "CakePHP",
+    Framework3: "Laravel",
+    Framework4: "Data Analysis",
+    description:
+      "Explored multiple backend frameworks and started combining development with data analysis.",
+  },
+  {
+    year: "2025 - Present",
+    title: "PT Wahana Artha",
+    Framework1: "Fullstack Web Development",
+    Framework2: "System Analysis",
+    Framework3: "Production Systems",
+    Framework4: "UI / UX",
+    description:
+      "Working as a Fullstack Web Developer & Analyst, trusted even before graduation.",
+  },
+];
+
+import Sertif1 from "./image/sertif3.png";
+import Sertif2 from "./image/sertif2.png";
+import Sertif3 from "./image/sertif1.png";
+import Sertif4 from "./image/sertif4.png";
+import Sertif5 from "./image/sertif5.png";
+import Sertif6 from "./image/sertif8.jpg";
+import Sertif7 from "./image/sertif6.png";
+
+export const certif = [
+  {
+    title: "Finalis Business Plan UWP 2024",
+    link: "https://drive.google.com/drive/folders/1tUDJa0N6GdJfpVvH9d72kMIrn8UlF3wq",
+    thumbnail: Sertif1,
+  },
+  {
+    title: "Juara 3 Entrepreneur Fair Universitas Ma Chung",
+    link: "https://drive.google.com/drive/folders/1tUDJa0N6GdJfpVvH9d72kMIrn8UlF3wq",
+    thumbnail: Sertif2,
+  },
+  {
+    title: "Juara 3 BPC 8.0 Universitas Hang Tuah",
+    link: "https://drive.google.com/drive/folders/1tUDJa0N6GdJfpVvH9d72kMIrn8UlF3wq",
+    thumbnail: Sertif3,
+  },
+  {
+    title: "IT Specialist JavaScript",
+    link: "https://drive.google.com/drive/folders/1tUDJa0N6GdJfpVvH9d72kMIrn8UlF3wq",
+    thumbnail: Sertif4,
+  },
+  {
+    title: "Semifinalis ABC 2023",
+    link: "https://drive.google.com/drive/folders/1tUDJa0N6GdJfpVvH9d72kMIrn8UlF3wq",
+    thumbnail: Sertif5,
+  },
+  {
+    title: "Bootcamp React Storybook Machine Vision",
+    link: "https://drive.google.com/drive/folders/1tUDJa0N6GdJfpVvH9d72kMIrn8UlF3wq",
+    thumbnail: Sertif6,
+  },
+  {
+    title: "Semifinalis UI Innovation War 2023",
+    link: "https://drive.google.com/drive/folders/1tUDJa0N6GdJfpVvH9d72kMIrn8UlF3wq",
+    thumbnail: Sertif7,
+  },
 ];
