@@ -259,13 +259,13 @@ export const flow = [
   },
   {
     year: "2024 - 2025",
-    title: "Advanced Backend & Fullstack",
+    title: "Intership Advanced Backend & Fullstack",
     Framework1: "Django",
     Framework2: "CakePHP",
     Framework3: "Laravel",
     Framework4: "Data Analysis",
     description:
-      "Explored multiple backend frameworks and started combining development with data analysis.",
+      "Internship and take various certifications to Explore various backend frameworks and start combining development with data analysis.",
   },
   {
     year: "2025 - Present",
@@ -322,5 +322,39 @@ export const certif = [
     title: "Semifinalis UI Innovation War 2023",
     link: "https://drive.google.com/drive/folders/1tUDJa0N6GdJfpVvH9d72kMIrn8UlF3wq",
     thumbnail: Sertif7,
+  },
+];
+
+import {
+  IconLayout,
+  IconServer,
+  IconStack2,
+  IconPalette,
+} from "@tabler/icons-react";
+
+export const services = [
+  {
+    title: "Frontend Development",
+    desc: "Building responsive, fast, and accessible web interfaces with modern frameworks.",
+    icon: IconLayout,
+    tags: ["React", "Nuxt.js", "Next.js"],
+  },
+  {
+    title: "Backend Development",
+    desc: "Designing secure APIs, databases, and scalable server-side systems.",
+    icon: IconServer,
+    tags: ["Laravel", "Node.js", "Cake.php"],
+  },
+  {
+    title: "Fullstack Web Development",
+    desc: "End-to-end web solutions from UI to database and deployment.",
+    icon: IconStack2,
+    tags: ["Laravel", "Cake", "Django"],
+  },
+  {
+    title: "UI / UX Design",
+    desc: "User-centered design focused on usability, clarity, and aesthetics.",
+    icon: IconPalette,
+    tags: ["Figma", "Wireframe", "Design System"],
   },
 ];

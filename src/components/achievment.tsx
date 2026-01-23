@@ -4,6 +4,7 @@ import Foto2 from "./image/machung.jpg";
 import Foto3 from "./image/storybook.jpg";
 import Foto4 from "./image/uwp.jpg";
 import Foto5 from "./image/wahana1.jpg";
+import Foto6 from "./image/foto4.jpg";
 
 const achievment = () => {
   return (
@@ -77,7 +78,6 @@ const achievment = () => {
               </div>
             </motion.div>
 
-            {/* Achievement 3 */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -100,7 +100,6 @@ const achievment = () => {
               </div>
             </motion.div>
 
-            {/* Achievement 4 */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -123,7 +122,28 @@ const achievment = () => {
               </div>
             </motion.div>
 
-            {/* Achievement 5 */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6 }}
+              className="overflow-hidden bg-cover bg-center rounded-lg cursor-pointer h-96 group"
+              style={{
+                backgroundImage: `url(${Foto6})`,
+              }}
+            >
+              <div className="flex flex-col justify-center w-full h-full px-8 py-4 transition-opacity duration-700 opacity-0 backdrop-blur-sm bg-gray-800/60 group-hover:opacity-100">
+                <h2 className="mt-4 text-xl font-semibold text-white capitalize">
+                  Internship in Burningroom Technology
+                </h2>
+                <a
+                  href="https://burningroom.co.id/"
+                  className="text-blue-400 hover:underline"
+                >
+                  Burningroom Technology
+                </a>
+              </div>
+            </motion.div>
+
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}

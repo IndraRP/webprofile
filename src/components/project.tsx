@@ -13,7 +13,7 @@ const Project = () => {
   return (
     <section
       id="project-section"
-      className="text-gray-100 min-h-screen px-6 py-10"
+      className="text-gray-100 min-h-screen px-6 pt-40 pb-20"
     >
       <div className="container mx-auto">
         <h1 className="font-bold text-3xl mb-8 text-center text-white">
