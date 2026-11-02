@@ -91,6 +91,15 @@ export const WahanaKantinForm: React.FC = () => {
   // Cek apakah API sudah dikonfigurasi
   const apiConfigured = isKantinApiConfigured();
 
+  // Set document title secara dinamis khusus untuk halaman ini
+  useEffect(() => {
+    const prevTitle = document.title;
+    document.title = "Wahana Kantin - Form Transaksi";
+    return () => {
+      document.title = prevTitle;
+    };
+  }, []);
+
   // Deteksi PWA standalone & install prompt
   useEffect(() => {
     // Cek apakah sudah berjalan di mode standalone (PWA terinstal)
