@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b" />
+      <stop offset="100%" stop-color="#022c22" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="110" fill="url(#bgGrad)" stroke="#10b981" stroke-width="12" />
+  <g filter="url(#shadow)" fill="none" stroke="#ffffff" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Steam -->
+    <path d="M 210 110 Q 195 150 210 190" stroke="#34d399" />
+    <path d="M 256 95 Q 240 145 256 190" stroke="#10b981" />
+    <path d="M 302 110 Q 287 150 302 190" stroke="#34d399" />
+    <!-- Cup -->
+    <path d="M 140 220 L 372 220 L 350 360 C 346 390 320 410 290 410 L 222 410 C 192 410 166 390 162 360 Z" fill="#0f172a" stroke="#ffffff" />
+    <!-- Coffee fill -->
+    <path d="M 168 250 L 344 250 L 332 340 C 330 360 310 380 290 380 L 222 380 C 202 380 182 360 180 340 Z" fill="#f59e0b" stroke="none" />
+    <!-- Handle -->
+    <path d="M 365 240 C 430 240 430 340 355 340" />
+    <!-- Saucer -->
+    <path d="M 120 440 L 392 440" stroke="#10b981" stroke-width="22" />
+  </g>
+</svg>

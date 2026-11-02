@@ -17,9 +17,38 @@ import InteractiveCursor from "./components/InteractiveCursor";
 import ChatBox from "./components/Chatbox";
 import Flow from "./components/flow";
 import { OurServices } from "./components/services";
+import WahanaKantinForm from "./pages/WahanaKantinForm";
+
+// Helper pengecekan route hidden page /wahanakantin-form
+const isWahanaKantinRoute = (): boolean => {
+  if (typeof window === "undefined") return false;
+  const path = window.location.pathname.toLowerCase().replace(/\/+$/, "");
+  const hash = window.location.hash.toLowerCase().replace(/^#\/?/, "");
+  return (
+    path.endsWith("/wahanakantin-form") ||
+    hash === "wahanakantin-form" ||
+    hash.startsWith("wahanakantin-form")
+  );
+};
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [isKantinPage, setIsKantinPage] = useState<boolean>(isWahanaKantinRoute);
+
+  // Listener untuk perubahan URL browser (popstate / hashchange)
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setIsKantinPage(isWahanaKantinRoute());
+    };
+
+    window.addEventListener("popstate", handleLocationChange);
+    window.addEventListener("hashchange", handleLocationChange);
+
+    return () => {
+      window.removeEventListener("popstate", handleLocationChange);
+      window.removeEventListener("hashchange", handleLocationChange);
+    };
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,6 +58,12 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Jika sedang membuka route /wahanakantin-form, render halaman form transaksi kantin
+  if (isKantinPage) {
+    return <WahanaKantinForm />;
+  }
+
+  // Halaman utama portfolio
   return (
     <>
       <BootScreen isVisible={loading} />

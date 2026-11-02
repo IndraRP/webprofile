@@ -1,8 +1,12 @@
 {
-    "rewrites": [
-        {
-            "source": "/webprofile/(.*)",
-            "destination": "/webprofile/index.html"
-        }
-    ]
+  "rewrites": [
+    {
+      "source": "/wahanakantin-form",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/webprofile/(.*)",
+      "destination": "/webprofile/index.html"
+    }
+  ]
 }
