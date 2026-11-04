@@ -33,7 +33,7 @@ const CareerFlow = () => {
         {/* Timeline */}
         <div
           ref={ref}
-          className="relative border-l border-gray-700 pl-8 space-y-14"
+          className="relative border-l border-gray-700 pl-0 md:pl-8 space-y-14"
         >
           {flow.map((item, index) => (
             <motion.div

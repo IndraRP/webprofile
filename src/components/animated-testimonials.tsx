@@ -1,10 +1,10 @@
 // Your main file
 import AnimatedTestimonials from "./ui/animated-testimonials";
-import Foto1 from "./image/hangtuah.jpg";
-import Foto2 from "./image/uwp.jpg";
-import Foto3 from "./image/foto3.jpg";
-import Foto4 from "./image/foto4.jpg";
-import Foto5 from "./image/foto5.jpg";
+import Foto1 from "./image/hangtuah.webp";
+import Foto2 from "./image/uwp.webp";
+import Foto3 from "./image/foto3.webp";
+import Foto4 from "./image/foto4.webp";
+import Foto5 from "./image/foto5.webp";
 
 export function AnimatedTestimonialsDemo() {
   const testimonials = [
@@ -45,5 +45,11 @@ export function AnimatedTestimonialsDemo() {
     },
   ];
 
-  return <AnimatedTestimonials testimonials={testimonials} />;
+  return (
+    <AnimatedTestimonials
+      testimonials={testimonials}
+      autoplay={true}
+      autoplayInterval={5000}
+    />
+  );
 }

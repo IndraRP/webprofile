@@ -3,6 +3,15 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 
 const InteractiveCursor: React.FC = () => {
   const [hovering, setHovering] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    const isTouch =
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      window.matchMedia("(pointer: coarse)").matches;
+    setIsTouchDevice(isTouch);
+  }, []);
 
   // posisi mouse
   const cursorX = useMotionValue(-100);
@@ -14,16 +23,18 @@ const InteractiveCursor: React.FC = () => {
 
   // gerakkan cursor mengikuti mouse
   useEffect(() => {
+    if (isTouchDevice) return;
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX - 15);
       cursorY.set(e.clientY - 15);
     };
     window.addEventListener("mousemove", moveCursor);
     return () => window.removeEventListener("mousemove", moveCursor);
-  }, [cursorX, cursorY]);
+  }, [cursorX, cursorY, isTouchDevice]);
 
   // deteksi hover elemen interaktif
   useEffect(() => {
+    if (isTouchDevice) return;
     const interactiveElements = document.querySelectorAll(
       "button, a, .hoverable, input, textarea, img"
     );
@@ -42,7 +53,10 @@ const InteractiveCursor: React.FC = () => {
         el.removeEventListener("mouseleave", handleMouseLeave);
       });
     };
-  }, []);
+  }, [isTouchDevice]);
+
+  // Jangan render custom cursor pada layar sentuh/ponsel
+  if (isTouchDevice) return null;
 
   return (
     <>

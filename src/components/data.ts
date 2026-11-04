@@ -279,13 +279,13 @@ export const flow = [
   },
 ];
 
-import Sertif1 from "./image/sertif3.png";
-import Sertif2 from "./image/sertif2.png";
-import Sertif3 from "./image/sertif1.png";
-import Sertif4 from "./image/sertif4.png";
-import Sertif5 from "./image/sertif5.png";
-import Sertif6 from "./image/sertif8.jpg";
-import Sertif7 from "./image/sertif6.png";
+import Sertif1 from "./image/sertif3.webp";
+import Sertif2 from "./image/sertif2.webp";
+import Sertif3 from "./image/sertif1.webp";
+import Sertif4 from "./image/sertif4.webp";
+import Sertif5 from "./image/sertif5.webp";
+import Sertif6 from "./image/sertif8.webp";
+import Sertif7 from "./image/sertif6.webp";
 
 export const certif = [
   {

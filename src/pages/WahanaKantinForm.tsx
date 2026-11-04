@@ -91,12 +91,52 @@ export const WahanaKantinForm: React.FC = () => {
   // Cek apakah API sudah dikonfigurasi
   const apiConfigured = isKantinApiConfigured();
 
-  // Set document title secara dinamis khusus untuk halaman ini
+  // Set document title, manifest PWA khusus, dan service worker
   useEffect(() => {
     const prevTitle = document.title;
     document.title = "Wahana Kantin - Form Transaksi";
+
+    // Injeksi manifest PWA khusus Wahana Kantin secara dinamis
+    let manifestLink = document.querySelector<HTMLLinkElement>(
+      'link[rel="manifest"][data-pwa="wahana-kantin"]'
+    );
+    if (!manifestLink) {
+      manifestLink = document.createElement("link");
+      manifestLink.rel = "manifest";
+      manifestLink.href = "/wahanakantin-manifest.json";
+      manifestLink.setAttribute("data-pwa", "wahana-kantin");
+      document.head.appendChild(manifestLink);
+    }
+
+    // Set theme-color meta tag
+    let themeMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+    const prevTheme = themeMeta ? themeMeta.content : null;
+    if (!themeMeta) {
+      themeMeta = document.createElement("meta");
+      themeMeta.name = "theme-color";
+      themeMeta.content = "#059669";
+      document.head.appendChild(themeMeta);
+    } else {
+      themeMeta.content = "#059669";
+    }
+
+    // Register Service Worker khusus Wahana Kantin
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/sw-kantin.js")
+        .catch((err) => {
+          console.warn("Kantin SW registration notice:", err);
+        });
+    }
+
     return () => {
       document.title = prevTitle;
+      if (manifestLink && manifestLink.parentNode) {
+        manifestLink.parentNode.removeChild(manifestLink);
+      }
+      if (themeMeta && prevTheme) {
+        themeMeta.content = prevTheme;
+      }
     };
   }, []);
 

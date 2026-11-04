@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
-import { lazy } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 const World = lazy(async () => {
   const module = await import("./ui/globe");
@@ -394,8 +395,27 @@ export function GlobeDemo() {
     },
   ];
 
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    rootMargin: "200px 0px",
+  });
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
-    <div className="flex flex-row items-center justify-center py-20 bg-gray-950 relative w-full h-[500px] lg:h-screen lg:my-20">
+    <div
+      ref={ref}
+      className="flex flex-row items-center justify-center py-20 bg-gray-950 relative w-full h-[500px] lg:h-screen lg:my-20"
+    >
       <div className="max-w-7xl mx-auto w-full relative overflow-hidden h-full md:h-[40rem] px-4">
         <motion.div
           initial={{
@@ -421,7 +441,30 @@ export function GlobeDemo() {
         </motion.div>
         <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent to-gray-950 z-40" />
         <div className="absolute w-full -bottom-20 h-72 md:h-full z-10">
-          <World data={sampleArcs} globeConfig={globeConfig} />
+          {isMobile ? (
+            <div className="text-center px-6 py-8 rounded-2xl bg-slate-900/60 border border-slate-800 max-w-sm mx-auto backdrop-blur-md z-30 shadow-xl">
+              <span className="text-xs uppercase tracking-widest text-cyan-400 font-semibold block mb-2">
+                Mobile Optimized
+              </span>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Animasi 3D Globe dinonaktifkan di layar ponsel untuk menghemat baterai & data, serta menjaga performa tetap ringan.
+              </p>
+            </div>
+          ) : inView ? (
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center h-full text-slate-400 text-sm">
+                  Memuat 3D Globe...
+                </div>
+              }
+            >
+              <World data={sampleArcs} globeConfig={globeConfig} />
+            </Suspense>
+          ) : (
+            <div className="flex items-center justify-center h-full text-slate-500 text-xs">
+              Scroll ke bawah untuk memuat 3D Globe
+            </div>
+          )}
         </div>
       </div>
     </div>

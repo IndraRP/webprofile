@@ -65,7 +65,7 @@ function App() {
 
   // Halaman utama portfolio
   return (
-    <>
+    <div>
       <BootScreen isVisible={loading} />
 
       {!loading && (
@@ -77,6 +77,7 @@ function App() {
           <InteractiveCursor />
 
           <FloatingDockDemo />
+          <div>
           <AnimatedTestimonialsDemo />
           <TextHoverEffectDemo />
           <OurServices />
@@ -89,9 +90,10 @@ function App() {
           <Footer />
           <RocketScrollTop />
           <ChatBox />
+          </div>
         </motion.div>
       )}
-    </>
+    </div>
   );
 }
 

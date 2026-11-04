@@ -1,6 +1,6 @@
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import CvIndra from "../image/CV Indra Ridho R.P.pdf";
 
 type Testimonial = {
@@ -13,19 +13,21 @@ type Testimonial = {
 const AnimatedTestimonials = ({
   testimonials,
   autoplay = false,
+  autoplayInterval = 7000,
 }: {
   testimonials: Testimonial[];
   autoplay?: boolean;
+  autoplayInterval?: number;
 }) => {
   const [active, setActive] = useState(0);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setActive((prev) => (prev + 1) % testimonials.length);
-  };
+  }, [testimonials.length]);
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  }, [testimonials.length]);
 
   const isActive = (index: number) => {
     return index === active;
@@ -33,10 +35,10 @@ const AnimatedTestimonials = ({
 
   useEffect(() => {
     if (autoplay) {
-      const interval = setInterval(handleNext, 5000);
+      const interval = setInterval(handleNext, autoplayInterval);
       return () => clearInterval(interval);
     }
-  }, [autoplay]);
+  }, [autoplay, autoplayInterval, handleNext]);
 
   const randomRotateY = () => {
     return Math.floor(Math.random() * 21) - 10;
@@ -83,6 +85,7 @@ const AnimatedTestimonials = ({
                     <img
                       src={testimonial.src}
                       alt={testimonial.name}
+                      loading="lazy"
                       className="h-full w-full rounded-3xl object-cover object-center"
                     />
                   </motion.div>

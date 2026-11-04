@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
-import Foto1 from "./image/hangtuah.jpg";
-import Foto2 from "./image/machung.jpg";
-import Foto3 from "./image/storybook.jpg";
-import Foto4 from "./image/uwp.jpg";
-import Foto5 from "./image/wahana1.jpg";
-import Foto6 from "./image/foto4.jpg";
+import Foto1 from "./image/hangtuah.webp";
+import Foto2 from "./image/machung.webp";
+import Foto3 from "./image/storybook.webp";
+import Foto4 from "./image/uwp.webp";
+import Foto5 from "./image/wahana1.webp";
+import Foto6 from "./image/foto4.webp";
 
 const achievment = () => {
   return (
     <div className="flex justify-center">
       {/* PORTOFOLIO */}
-      <section id="achievment-section" className="relative pb-10 pt-16">
+      <section id="achievment-section" className="relative pb-10 pt-16 px-6 md:px-0">
         <div className="container py-10">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}

@@ -65,6 +65,8 @@ export function Certif() {
                   <img
                     src={item.thumbnail}
                     alt={item.title}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain bg-black"
                   />
 
