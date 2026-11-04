@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   IconBuildingStore,
@@ -19,6 +19,8 @@ import {
   IconWifiOff,
   IconHelpCircle,
   IconX,
+  IconSearch,
+  IconChevronDown,
 } from "@tabler/icons-react";
 import {
   Product,
@@ -33,6 +35,20 @@ interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
   userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
 }
+
+// Daftar nama penginput resmi Wahana Kantin
+const INPUTTER_OPTIONS: string[] = [
+  "Indra",
+  "Zmra",
+  "Sabrina",
+  "Friza",
+  "Bintang",
+  "Albi",
+  "Fahmi",
+  "Panji",
+  "Fahrel",
+  "Deasty",
+];
 
 // Format currency Rupiah Indonesia
 const formatRupiah = (amount: number): string => {
@@ -68,6 +84,76 @@ export const WahanaKantinForm: React.FC = () => {
 
   // Search filter untuk produk
   const [searchFilter, setSearchFilter] = useState<string>("");
+
+  // State pencarian & dropdown untuk Nama Penginput (Select Search)
+  const [inputterSearch, setInputterSearch] = useState<string>("");
+  const [isInputterOpen, setIsInputterOpen] = useState<boolean>(false);
+  const inputterDropdownRef = useRef<HTMLDivElement>(null);
+
+  // State pencarian & dropdown untuk Produk (Select Search)
+  const [isProductOpen, setIsProductOpen] = useState<boolean>(false);
+  const productDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Klik di luar menutup dropdown produk
+  useEffect(() => {
+    const handleClickOutsideProduct = (event: MouseEvent) => {
+      if (
+        productDropdownRef.current &&
+        !productDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsProductOpen(false);
+      }
+    };
+    if (isProductOpen) {
+      document.addEventListener("mousedown", handleClickOutsideProduct);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideProduct);
+    };
+  }, [isProductOpen]);
+
+  const handleSelectProduct = (productId: string) => {
+    setSelectedProductId(productId);
+    setIsProductOpen(false);
+    setSearchFilter("");
+    if (fieldErrors.product) {
+      setFieldErrors((prev) => ({ ...prev, product: undefined }));
+    }
+  };
+
+  // Klik di luar menutup dropdown nama penginput
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        inputterDropdownRef.current &&
+        !inputterDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsInputterOpen(false);
+      }
+    };
+    if (isInputterOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isInputterOpen]);
+
+  // Filter list penginput berdasarkan ketikan user
+  const filteredInputters = useMemo(() => {
+    if (!inputterSearch.trim()) return INPUTTER_OPTIONS;
+    const term = inputterSearch.toLowerCase().trim();
+    return INPUTTER_OPTIONS.filter((name) => name.toLowerCase().includes(term));
+  }, [inputterSearch]);
+
+  const handleSelectInputter = (name: string) => {
+    setInputterName(name);
+    setIsInputterOpen(false);
+    setInputterSearch("");
+    if (fieldErrors.inputter) {
+      setFieldErrors((prev) => ({ ...prev, inputter: undefined }));
+    }
+  };
 
   // State submit & notifikasi
   const [submitting, setSubmitting] = useState<boolean>(false);
@@ -299,9 +385,14 @@ export const WahanaKantinForm: React.FC = () => {
       const response = await submitTransaction(payload);
       setSuccessData(response);
 
-      // Reset form field yang relevan untuk input transaksi berikutnya
+      // Reset seluruh form input untuk input transaksi berikutnya
+      setTransactionDate(getTodayDateString());
+      setInputterName("");
+      setInputterSearch("");
+      setIsInputterOpen(false);
       setSelectedProductId("");
       setSearchFilter("");
+      setIsProductOpen(false);
       setQuantity(1);
       setNotes("");
       setFieldErrors({});
@@ -557,91 +648,283 @@ export const WahanaKantinForm: React.FC = () => {
               )}
             </div>
 
-            {/* Field B: Nama Penginput */}
-            <div>
+            {/* Field B: Nama Penginput (Select Search) */}
+            <div className="relative" ref={inputterDropdownRef}>
               <label
-                htmlFor="inputter_name"
-                className="block text-xs sm:text-sm font-medium text-slate-300 mb-1.5 flex items-center gap-1.5"
+                htmlFor="inputter_name_btn"
+                className="block text-xs sm:text-sm font-medium text-slate-300 mb-1.5 flex items-center justify-between"
               >
-                <IconUser size={16} className="text-slate-400" />
-                Nama Penginput <span className="text-rose-400">*</span>
+                <span className="flex items-center gap-1.5">
+                  <IconUser size={16} className="text-slate-400" />
+                  Nama Penginput <span className="text-rose-400">*</span>
+                </span>
+                {inputterName && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setInputterName("");
+                      setInputterSearch("");
+                    }}
+                    disabled={submitting}
+                    className="text-[11px] text-slate-400 hover:text-rose-300 transition"
+                  >
+                    Reset Nama
+                  </button>
+                )}
               </label>
-              <input
-                id="inputter_name"
-                type="text"
-                placeholder="Contoh: Admin Kantin / Nama Petugas"
-                value={inputterName}
-                onChange={(e) => {
-                  setInputterName(e.target.value);
-                  if (fieldErrors.inputter) {
-                    setFieldErrors((prev) => ({ ...prev, inputter: undefined }));
+
+              {/* Tombol pemicu dropdown Select Search */}
+              <button
+                id="inputter_name_btn"
+                type="button"
+                onClick={() => {
+                  if (!submitting) {
+                    setIsInputterOpen((prev) => !prev);
                   }
                 }}
                 disabled={submitting}
                 className={`w-full px-3.5 py-2.5 bg-slate-950/80 border ${
-                  fieldErrors.inputter ? "border-rose-500" : "border-slate-800"
-                } rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition disabled:opacity-50`}
-              />
+                  fieldErrors.inputter
+                    ? "border-rose-500"
+                    : isInputterOpen
+                    ? "border-emerald-500 ring-2 ring-emerald-500/20"
+                    : "border-slate-800"
+                } rounded-xl text-left text-sm flex items-center justify-between focus:outline-none transition disabled:opacity-50 cursor-pointer`}
+              >
+                <span className={inputterName ? "text-white font-medium" : "text-slate-500"}>
+                  {inputterName || "-- Pilih / Cari Nama Penginput --"}
+                </span>
+                <IconChevronDown
+                  size={18}
+                  className={`text-slate-400 transition-transform duration-200 ${
+                    isInputterOpen ? "rotate-180 text-emerald-400" : ""
+                  }`}
+                />
+              </button>
+
+              {/* Dropdown Menu dengan Search Input */}
+              <AnimatePresence>
+                {isInputterOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute z-50 mt-1.5 w-full bg-slate-900 border border-slate-700/80 rounded-xl shadow-2xl overflow-hidden backdrop-blur-xl"
+                  >
+                    {/* Kotak Pencarian Nama */}
+                    <div className="p-2 border-b border-slate-800 bg-slate-950/70 sticky top-0">
+                      <div className="relative">
+                        <IconSearch
+                          size={15}
+                          className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                        />
+                        <input
+                          type="text"
+                          autoFocus
+                          value={inputterSearch}
+                          onChange={(e) => setInputterSearch(e.target.value)}
+                          placeholder="Ketik untuk mencari nama..."
+                          className="w-full pl-8 pr-7 py-1.5 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition"
+                        />
+                        {inputterSearch && (
+                          <button
+                            type="button"
+                            onClick={() => setInputterSearch("")}
+                            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                          >
+                            <IconX size={13} />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Daftar Pilihan Nama */}
+                    <div className="max-h-52 overflow-y-auto p-1.5 space-y-1">
+                      {filteredInputters.length > 0 ? (
+                        filteredInputters.map((name) => {
+                          const isSelected = inputterName === name;
+                          return (
+                            <button
+                              key={name}
+                              type="button"
+                              onClick={() => handleSelectInputter(name)}
+                              className={`w-full px-3 py-2 rounded-lg text-left text-xs flex items-center justify-between transition cursor-pointer ${
+                                isSelected
+                                  ? "bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30"
+                                  : "text-slate-200 hover:bg-slate-800/80 hover:text-white"
+                              }`}
+                            >
+                              <span>{name}</span>
+                              {isSelected && (
+                                <IconCheck size={16} className="text-emerald-400" />
+                              )}
+                            </button>
+                          );
+                        })
+                      ) : (
+                        <div className="py-4 text-center text-xs text-slate-400">
+                          Nama &quot;{inputterSearch}&quot; tidak ditemukan.
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               {fieldErrors.inputter && (
                 <p className="mt-1 text-xs text-rose-400">{fieldErrors.inputter}</p>
               )}
             </div>
 
-            {/* Field C: Produk */}
-            <div>
+            {/* Field C: Produk (Select Search) */}
+            <div className="relative" ref={productDropdownRef}>
               <label
-                htmlFor="product_select"
-                className="block text-xs sm:text-sm font-medium text-slate-300 mb-1.5 flex items-center gap-1.5"
+                htmlFor="product_select_btn"
+                className="block text-xs sm:text-sm font-medium text-slate-300 mb-1.5 flex items-center justify-between"
               >
-                <IconCoffee size={16} className="text-slate-400" />
-                Pilih Produk <span className="text-rose-400">*</span>
+                <span className="flex items-center gap-1.5">
+                  <IconCoffee size={16} className="text-slate-400" />
+                  Pilih Produk <span className="text-rose-400">*</span>
+                </span>
+                {selectedProduct && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSelectedProductId("");
+                      setSearchFilter("");
+                    }}
+                    disabled={submitting}
+                    className="text-[11px] text-slate-400 hover:text-rose-300 transition"
+                  >
+                    Reset Produk
+                  </button>
+                )}
               </label>
 
-              {/* Search input untuk kemudahan pencarian jika produk banyak */}
-              {products.length > 5 && (
-                <div className="mb-2">
-                  <input
-                    type="text"
-                    placeholder="Cari nama produk..."
-                    value={searchFilter}
-                    onChange={(e) => setSearchFilter(e.target.value)}
-                    disabled={submitting || productsLoading}
-                    className="w-full px-3 py-1.5 bg-slate-950/50 border border-slate-800/80 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition"
-                  />
-                </div>
-              )}
-
-              <select
-                id="product_select"
-                value={selectedProductId}
-                onChange={(e) => {
-                  setSelectedProductId(e.target.value);
-                  if (fieldErrors.product) {
-                    setFieldErrors((prev) => ({ ...prev, product: undefined }));
+              {/* Tombol pemicu dropdown Select Search Produk */}
+              <button
+                id="product_select_btn"
+                type="button"
+                onClick={() => {
+                  if (!submitting && !productsLoading && products.length > 0) {
+                    setIsProductOpen((prev) => !prev);
                   }
                 }}
                 disabled={submitting || productsLoading || products.length === 0}
                 className={`w-full px-3.5 py-2.5 bg-slate-950/80 border ${
-                  fieldErrors.product ? "border-rose-500" : "border-slate-800"
-                } rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition disabled:opacity-50 cursor-pointer`}
+                  fieldErrors.product
+                    ? "border-rose-500"
+                    : isProductOpen
+                    ? "border-emerald-500 ring-2 ring-emerald-500/20"
+                    : "border-slate-800"
+                } rounded-xl text-left text-sm flex items-center justify-between focus:outline-none transition disabled:opacity-50 cursor-pointer`}
               >
-                <option value="" className="bg-slate-900 text-slate-400">
+                <span
+                  className={
+                    selectedProduct
+                      ? "text-white font-medium truncate pr-2"
+                      : "text-slate-500 truncate pr-2"
+                  }
+                >
                   {productsLoading
-                    ? "-- Memuat master data produk... --"
+                    ? "Memuat data produk..."
                     : products.length === 0
-                    ? "-- Tidak ada produk aktif yang tersedia --"
-                    : "-- Pilih Produk Kantin --"}
-                </option>
-                {filteredProducts.map((p) => (
-                  <option
-                    key={p.product_id}
-                    value={p.product_id}
-                    className="bg-slate-900 text-white py-1"
+                    ? "Tidak ada produk aktif"
+                    : selectedProduct
+                    ? `${selectedProduct.product_name} (${selectedProduct.unit || "pcs"}) — ${formatRupiah(selectedProduct.price)}`
+                    : "-- Pilih / Cari Produk Kantin --"}
+                </span>
+                <div className="flex items-center gap-1 shrink-0">
+                  {productsLoading && (
+                    <IconLoader2 size={16} className="text-emerald-400 animate-spin mr-1" />
+                  )}
+                  <IconChevronDown
+                    size={18}
+                    className={`text-slate-400 transition-transform duration-200 ${
+                      isProductOpen ? "rotate-180 text-emerald-400" : ""
+                    }`}
+                  />
+                </div>
+              </button>
+
+              {/* Dropdown Menu dengan Search Input untuk Produk */}
+              <AnimatePresence>
+                {isProductOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute z-50 mt-1.5 w-full bg-slate-900 border border-slate-700/80 rounded-xl shadow-2xl overflow-hidden backdrop-blur-xl"
                   >
-                    {p.product_name} ({p.unit || "pcs"}) — {formatRupiah(p.price)}
-                  </option>
-                ))}
-              </select>
+                    {/* Kotak Pencarian Produk */}
+                    <div className="p-2 border-b border-slate-800 bg-slate-950/70 sticky top-0">
+                      <div className="relative">
+                        <IconSearch
+                          size={15}
+                          className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                        />
+                        <input
+                          type="text"
+                          autoFocus
+                          value={searchFilter}
+                          onChange={(e) => setSearchFilter(e.target.value)}
+                          placeholder="Ketik nama atau kode produk..."
+                          className="w-full pl-8 pr-7 py-1.5 bg-slate-900 border border-slate-700/80 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition"
+                        />
+                        {searchFilter && (
+                          <button
+                            type="button"
+                            onClick={() => setSearchFilter("")}
+                            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                          >
+                            <IconX size={13} />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Daftar Pilihan Produk */}
+                    <div className="max-h-60 overflow-y-auto p-1.5 space-y-1">
+                      {filteredProducts.length > 0 ? (
+                        filteredProducts.map((p) => {
+                          const isSelected = selectedProductId === p.product_id;
+                          return (
+                            <button
+                              key={p.product_id}
+                              type="button"
+                              onClick={() => handleSelectProduct(p.product_id)}
+                              className={`w-full px-3 py-2.5 rounded-lg text-left text-xs flex items-center justify-between transition cursor-pointer ${
+                                isSelected
+                                  ? "bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30"
+                                  : "text-slate-200 hover:bg-slate-800/80 hover:text-white"
+                              }`}
+                            >
+                              <div className="flex flex-col pr-2">
+                                <span className="font-medium text-slate-100">{p.product_name}</span>
+                              </div>
+                              <div className="flex items-center gap-2 shrink-0">
+                                <span className="font-mono text-emerald-400 font-medium bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/20">
+                                  {formatRupiah(p.price)}
+                                </span>
+                                {isSelected && (
+                                  <IconCheck size={16} className="text-emerald-400" />
+                                )}
+                              </div>
+                            </button>
+                          );
+                        })
+                      ) : (
+                        <div className="py-4 text-center text-xs text-slate-400">
+                          Produk &quot;{searchFilter}&quot; tidak ditemukan.
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               {fieldErrors.product && (
                 <p className="mt-1 text-xs text-rose-400">{fieldErrors.product}</p>
               )}
