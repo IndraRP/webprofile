@@ -39,13 +39,13 @@ interface BeforeInstallPromptEvent extends Event {
 // Daftar nama penginput resmi Wahana Kantin
 const INPUTTER_OPTIONS: string[] = [
   "Indra",
-  "Zmra",
-  "Sabrina",
   "Friza",
   "Bintang",
-  "Albi",
   "Fahmi",
   "Panji",
+  "Zmra",
+  "Sabrina",
+  "Albi",
   "Fahrel",
   "Deasty",
 ];
@@ -177,24 +177,12 @@ export const WahanaKantinForm: React.FC = () => {
   // Cek apakah API sudah dikonfigurasi
   const apiConfigured = isKantinApiConfigured();
 
-  // Set document title, manifest PWA khusus, dan service worker
+  // Set document title dan theme-color khusus halaman kantin
   useEffect(() => {
     const prevTitle = document.title;
     document.title = "Wahana Kantin - Form Transaksi";
 
-    // Injeksi manifest PWA khusus Wahana Kantin secara dinamis
-    let manifestLink = document.querySelector<HTMLLinkElement>(
-      'link[rel="manifest"][data-pwa="wahana-kantin"]'
-    );
-    if (!manifestLink) {
-      manifestLink = document.createElement("link");
-      manifestLink.rel = "manifest";
-      manifestLink.href = "/wahanakantin-manifest.json";
-      manifestLink.setAttribute("data-pwa", "wahana-kantin");
-      document.head.appendChild(manifestLink);
-    }
-
-    // Set theme-color meta tag
+    // Set theme-color meta tag khusus Wahana Kantin
     let themeMeta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
     const prevTheme = themeMeta ? themeMeta.content : null;
     if (!themeMeta) {
@@ -206,20 +194,8 @@ export const WahanaKantinForm: React.FC = () => {
       themeMeta.content = "#059669";
     }
 
-    // Register Service Worker khusus Wahana Kantin
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("/sw-kantin.js")
-        .catch((err) => {
-          console.warn("Kantin SW registration notice:", err);
-        });
-    }
-
     return () => {
       document.title = prevTitle;
-      if (manifestLink && manifestLink.parentNode) {
-        manifestLink.parentNode.removeChild(manifestLink);
-      }
       if (themeMeta && prevTheme) {
         themeMeta.content = prevTheme;
       }
