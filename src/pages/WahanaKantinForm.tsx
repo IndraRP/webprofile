@@ -415,31 +415,23 @@ export const WahanaKantinForm: React.FC = () => {
               className="mb-6 p-5 rounded-2xl bg-emerald-950/60 border border-emerald-500/50 text-emerald-100 shadow-xl shadow-emerald-950/50"
             >
               <div className="flex items-start gap-3">
-                <IconCircleCheckFilled className="shrink-0 text-emerald-400 mt-0.5" size={24} />
                 <div className="flex-1">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold text-emerald-300 text-base">
-                      Transaksi Berhasil Disimpan
-                    </h3>
-                    <button
-                      type="button"
-                      onClick={() => setSuccessData(null)}
-                      className="text-xs text-emerald-400/80 hover:text-emerald-200 underline transition cursor-pointer"
-                    >
-                      Tutup
-                    </button>
-                  </div>
-                  <p className="text-xs text-emerald-200/80 mt-1">
-                    Data transaksi telah dicatat ke sheet Google Spreadsheet.
-                  </p>
-
-                  <div className="mt-3 grid grid-cols-2 gap-2 text-xs bg-emerald-900/30 p-3 rounded-lg border border-emerald-500/20">
-                    <div>
-                      <span className="text-emerald-300/70 block">ID Transaksi:</span>
-                      <span className="font-mono font-medium text-emerald-200">
-                        {successData.transaction_id}
-                      </span>
+                  <div className="flex items-center w-full">
+                    <IconCircleCheckFilled className="shrink-0 text-emerald-400 mb-1" size={24} />
+                    <div className="w-full flex items-center justify-between pl-2">
+                      <h3 className="font-semibold text-emerald-300 text-base">
+                        Transaksi Berhasil Disimpan
+                      </h3>
+                      <button
+                        type="button"
+                        onClick={() => setSuccessData(null)}
+                        className="text-xs text-emerald-400/80 hover:text-emerald-200 underline transition cursor-pointer"
+                      >
+                        Tutup
+                      </button>
                     </div>
+                  </div>
+                  <div className="mt-3 grid grid-cols-3 gap-2 text-xs bg-emerald-900/30 p-3 rounded-lg border border-emerald-500/20">
                     <div>
                       <span className="text-emerald-300/70 block">Produk:</span>
                       <span className="font-medium text-emerald-200">
