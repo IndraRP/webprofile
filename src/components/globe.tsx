@@ -414,7 +414,7 @@ export function GlobeDemo() {
   return (
     <div
       ref={ref}
-      className="flex flex-row items-center justify-center py-20 bg-gray-950 relative w-full h-[500px] lg:h-screen lg:my-20"
+      className="flex flex-row items-center justify-center pb-20 relative w-full h-[500px] lg:h-screen lg:my-20"
     >
       <div className="max-w-7xl mx-auto w-full relative overflow-hidden h-full md:h-[40rem] px-4">
         <motion.div
@@ -439,8 +439,8 @@ export function GlobeDemo() {
             don&apos;t forget to share it. :)
           </p>
         </motion.div>
-        <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent to-gray-950 z-40" />
-        <div className="absolute w-full -bottom-20 h-72 md:h-full z-10">
+        <div className="absolute w-full bottom-0 inset-x-0 h-40 pointer-events-none select-none from-transparent to-gray-950 z-40" />
+        <div className="absolute w-full -bottom-20 h-72 md:h-full z-10 pb-10">
           {isMobile ? (
             <div className="text-center px-6 py-8 rounded-2xl bg-slate-900/60 border border-slate-800 max-w-sm mx-auto backdrop-blur-md z-30 shadow-xl">
               <span className="text-xs uppercase tracking-widest text-cyan-400 font-semibold block mb-2">
@@ -453,7 +453,7 @@ export function GlobeDemo() {
           ) : inView ? (
             <Suspense
               fallback={
-                <div className="flex items-center justify-center h-full text-slate-400 text-sm">
+                <div className="flex items-center justify-center h-full text-slate-400 text-sm pb-5">
                   Memuat 3D Globe...
                 </div>
               }

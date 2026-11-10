@@ -18,6 +18,7 @@ import ChatBox from "./components/Chatbox";
 import Flow from "./components/flow";
 import { OurServices } from "./components/services";
 import WahanaKantinForm from "./pages/WahanaKantinForm";
+import AllProjects from "./pages/AllProjects";
 
 // Helper pengecekan route hidden page /wahanakantin-form
 const isWahanaKantinRoute = (): boolean => {
@@ -31,14 +32,29 @@ const isWahanaKantinRoute = (): boolean => {
   );
 };
 
+// Helper pengecekan route halaman View All Projects (/projects atau #/projects)
+const isAllProjectsRoute = (): boolean => {
+  if (typeof window === "undefined") return false;
+  const path = window.location.pathname.toLowerCase().replace(/\/+$/, "");
+  const hash = window.location.hash.toLowerCase().replace(/^#\/?/, "");
+  return (
+    path.endsWith("/projects") ||
+    path.endsWith("/all-projects") ||
+    hash === "projects" ||
+    hash === "all-projects"
+  );
+};
+
 function App() {
   const [loading, setLoading] = useState(true);
   const [isKantinPage, setIsKantinPage] = useState<boolean>(isWahanaKantinRoute);
+  const [isProjectsPage, setIsProjectsPage] = useState<boolean>(isAllProjectsRoute);
 
   // Listener untuk perubahan URL browser (popstate / hashchange)
   useEffect(() => {
     const handleLocationChange = () => {
       setIsKantinPage(isWahanaKantinRoute());
+      setIsProjectsPage(isAllProjectsRoute());
     };
 
     window.addEventListener("popstate", handleLocationChange);
@@ -63,6 +79,11 @@ function App() {
     return <WahanaKantinForm />;
   }
 
+  // Jika sedang membuka route View All Projects (#/projects), render halaman daftar semua project
+  if (isProjectsPage) {
+    return <AllProjects />;
+  }
+
   // Halaman utama portfolio
   return (
     <div>
@@ -78,18 +99,18 @@ function App() {
 
           <FloatingDockDemo />
           <div>
-          <AnimatedTestimonialsDemo />
-          <TextHoverEffectDemo />
-          <OurServices />
-          <Skills />
-          <Project />
-          <Achievment />
-          <Certif />
-          <Flow />
-          <GlobeDemo />
-          <Footer />
-          <RocketScrollTop />
-          <ChatBox />
+            <AnimatedTestimonialsDemo />
+            <TextHoverEffectDemo />
+            <OurServices />
+            <Skills />
+            <Project />
+            <Achievment />
+            <Certif />
+            <Flow />
+            <GlobeDemo />
+            <Footer />
+            <RocketScrollTop />
+            <ChatBox />
           </div>
         </motion.div>
       )}

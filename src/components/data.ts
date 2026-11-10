@@ -4,34 +4,35 @@ export const teamMembers = {
       name: "HTML",
       desc: "HyperText Markup Language",
       image:
-        "https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582748_1280.png",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
       url: "https://en.wikipedia.org/wiki/HTML",
     },
     {
       name: "CSS",
       desc: "Cascading Style Sheets",
       image:
-        "https://cdn.pixabay.com/photo/2017/08/05/11/16/logo-2582747_960_720.png",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
       url: "https://en.wikipedia.org/wiki/CSS",
     },
     {
       name: "JavaScript",
       desc: "Dynamic programming language",
       image:
-        "https://static.vecteezy.com/system/resources/previews/027/127/463/non_2x/javascript-logo-javascript-icon-transparent-free-png.png",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
       url: "https://en.wikipedia.org/wiki/JavaScript",
     },
     {
       name: "PHP",
       desc: "Hypertext Preprocessor",
-      image: "https://pngimg.com/d/php_PNG35.png",
+      image:
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg",
       url: "https://www.php.net/",
     },
     {
       name: "Python",
       desc: "Dynamic programming language",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/800px-Python-logo-notext.svg.png",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg",
       url: "https://www.python.org/",
     },
   ],
@@ -41,40 +42,42 @@ export const teamMembers = {
       name: "React JS",
       desc: "Frontend JavaScript Library",
       image:
-        "https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
       url: "https://react.dev/",
     },
     {
       name: "Next JS",
       desc: "React Framework for SSR & SSG",
-      image: "https://cdn.worldvectorlogo.com/logos/next-js.svg",
+      image:
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
       url: "https://nextjs.org/",
     },
     {
       name: "Tailwind CSS",
       desc: "Utility-first CSS Framework",
       image:
-        "https://static.vecteezy.com/system/resources/previews/067/565/433/non_2x/tailwind-css-logo-rounded-free-png.png",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
       url: "https://tailwindcss.com/",
     },
     {
       name: "Bootstrap",
       desc: "CSS Component Framework",
       image:
-        "https://brandlogos.net/wp-content/uploads/2021/09/bootstrap-logo.png",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
       url: "https://getbootstrap.com/",
     },
     {
       name: "Blade Laravel",
       desc: "Laravel's Templating Engine",
-      image: "https://avatars.githubusercontent.com/u/63051368?s=280&v=4",
+      image:
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
       url: "https://laravel.com/docs/11.x/blade",
     },
     {
       name: "Storybook",
       desc: "UI Component Documentation Tool",
       image:
-        "https://user-images.githubusercontent.com/18430599/38112659-491f9112-3368-11e8-8b65-1725f19a61fa.png",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/storybook/storybook-original.svg",
       url: "https://storybook.js.org/",
     },
   ],
@@ -84,13 +87,14 @@ export const teamMembers = {
       name: "Node JS",
       desc: "JavaScript Runtime Environment",
       image:
-        "https://cdn.iconscout.com/icon/free/png-256/free-node-js-logo-icon-download-in-svg-png-gif-file-formats--nodejs-programming-language-pack-logos-icons-1174925.png?f=webp&w=256",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
       url: "https://nodejs.org/en",
     },
     {
       name: "Laravel",
       desc: "Backend PHP Framework",
-      image: "https://download.logo.wine/logo/Laravel/Laravel-Logo.wine.png",
+      image:
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
       url: "https://laravel.com/",
     },
   ],
@@ -100,20 +104,21 @@ export const teamMembers = {
       name: "Django",
       desc: "Fullstack Python Web Framework",
       image:
-        "https://www.opengis.ch/wp-content/uploads/2020/04/django-python-logo.png",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg",
       url: "https://www.djangoproject.com/",
     },
     {
       name: "Cake PHP",
       desc: "Fullstack PHP Framework",
       image:
-        "https://yt3.googleusercontent.com/ytc/AIdro_mCrU6IQhLAOtNjLm17KQWe20lDETyOXnnJBDLGGRdzsDM=s900-c-k-c0x00ffffff-no-rj",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cakephp/cakephp-original.svg",
       url: "https://cakephp.org/",
     },
     {
       name: "Laravel",
       desc: "Backend PHP Framework",
-      image: "https://download.logo.wine/logo/Laravel/Laravel-Logo.wine.png",
+      image:
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
       url: "https://laravel.com/",
     },
   ],
@@ -123,10 +128,9 @@ export const teamMembers = {
       name: "Python Pandas",
       desc: "Data Analysis Library",
       image:
-        "https://images.seeklogo.com/logo-png/48/2/pandas-icon-logo-png_seeklogo-483545.png",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg",
       url: "https://pandas.pydata.org/",
     },
-
     {
       name: "Seaborn",
       desc: "Data Analysis Library",
@@ -137,73 +141,79 @@ export const teamMembers = {
 
   Lainnya: [
     {
-      name: "Ajax",
-      desc: "Asynchronous JavaScript & XML",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4K6e8npG9jHvAhkJo9neo0qW79DoWl9PBRw&s",
-      url: "https://api.jquery.com/jQuery.ajax/",
-    },
-    {
       name: "MySQL",
       desc: "Relational Database Management System",
-      image: "https://pngimg.com/d/mysql_PNG23.png",
+      image:
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
       url: "https://www.mysql.com/",
     },
     {
       name: "Figma",
       desc: "UI UX Designer",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/1667px-Figma-logo.svg.png",
+        "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
       url: "https://www.figma.com/",
     },
   ],
 };
 
-export const data = [
+export interface ProjectDataItem {
+  title: string;
+  description: string;
+  category: "Frontend" | "Fullstack" | "Enterprise" | "PWA";
+  previewType:
+    | "component"
+    | "ecommerce"
+    | "landing"
+    | "pos"
+    | "dashboard"
+    | "mobile"
+    | "cinema"
+    | "warehouse";
+  featured?: boolean;
+  url: string;
+  Framework1: string;
+  Framework2?: string;
+  Framework3?: string;
+  Framework4?: string;
+  Framework5?: string;
+  Framework6?: string;
+  Framework7?: string;
+  [key: string]: string | boolean | undefined;
+}
+
+export const data: ProjectDataItem[] = [
   {
-    title: "Storybook Component",
+    title: "Storybook Component Library",
+    description:
+      "Interactive UI component documentation and design system built with atomic design principles and smooth states.",
+    category: "Frontend",
+    previewType: "component",
+    featured: true,
     Framework1: "TypeScript",
-    Framework2: "Next",
+    Framework2: "Next.js",
     Framework3: "Storybook",
     url: "https://indrarp.github.io/StoryBook/?path=/docs/atomic-button--docs",
   },
   {
-    title: "E-commerce franchise (FrontEnd)",
-    Framework1: "Vitejs",
-    Framework2: "Bootstrap",
-    Framework3: "Javascript",
-    url: "https://github.com/IndraRP/FRIENDCHISE_TA",
-  },
-  {
-    title: "Personal Website",
-    Framework1: "React",
-    Framework2: "Tailwind",
-    Framework3: "PWA",
-    url: "https://indrarp.github.io/webprofile/",
-  },
-  {
-    title: "Personal Website Mahes",
-    Framework1: "React",
-    Framework2: "Tailwind",
-    Framework3: "Javascript",
-    url: "https://indrarp.github.io/mahesweb/",
-  },
-  {
-    title: "Personal Website Nur Ardiansah",
-    Framework1: "React",
-    Framework2: "Tailwind",
-    Framework3: "Javascript",
-    url: "https://indrarp.github.io/NurArdiansah/",
-  },
-  {
-    title: "UKK (WiCafe) Fullstack (Kasir, Admin dan Manajer)",
+    title: "UKK (WiCafe) Fullstack POS",
+    description:
+      "Fullstack cafe Point-of-Sale system featuring multi-role dashboards for Cashier, Admin, and Manager with real-time analytics.",
+    category: "Fullstack",
+    previewType: "pos",
+    featured: true,
     Framework1: "React",
     Framework2: "Tailwind",
     Framework3: "Node.js",
     url: "https://github.com/IndraRP/UKK-Caffe",
   },
   {
-    title: "Beberapa Project di Kantor Wahana Makmur Sejati",
+    title: "Enterprise Portal — Wahana Makmur Sejati",
+    description:
+      "Internal & public-facing corporate web modules, dealer management workflows, and interactive profile portals.",
+    category: "Enterprise",
+    previewType: "dashboard",
+    featured: true,
     Framework1: "Cake PHP",
     Framework2: "Bootstrap",
     Framework3: "HTML",
@@ -214,25 +224,88 @@ export const data = [
     url: "https://www.wahanahonda.com/profil",
   },
   {
-    title: "Barberinaja",
+    title: "Management Gudang (ScanLogistik)",
+    description:
+      "Smart warehouse inventory & barcode logistics tracking dashboard with real-time stock mutations and reporting.",
+    category: "Fullstack",
+    previewType: "warehouse",
+    featured: true,
+    Framework1: "Laravel",
+    Framework2: "Bootstrap",
+    Framework3: "Livewire",
+    url: "https://github.com/IndraRP/ScanLogistik",
+  },
+  {
+    title: "Barberinaja — Booking App",
+    description:
+      "Progressive Web App for barbershop reservations, stylist queue management, and seamless mobile-first customer booking.",
+    category: "PWA",
+    previewType: "mobile",
+    featured: true,
     Framework1: "Laravel",
     Framework2: "Bootstrap",
     Framework3: "PWA",
     url: "https://github.com/IndraRP/barberinaja",
   },
   {
-    title: "Flickora",
+    title: "Flickora — Streaming & Ticketing",
+    description:
+      "Modern movie discovery and cinema showcase platform with installable PWA support and responsive dark interface.",
+    category: "PWA",
+    previewType: "cinema",
+    featured: true,
     Framework1: "Laravel",
     Framework2: "Bootstrap",
     Framework3: "PWA",
     url: "https://github.com/IndraRP/Flickora",
   },
   {
-    title: "Management Gudang",
-    Framework1: "Laravel",
+    title: "Friendchise E-Commerce (FrontEnd)",
+    description:
+      "Modern franchise marketplace frontend with intuitive catalog filtering, partnership onboarding, and clean UI.",
+    category: "Frontend",
+    previewType: "ecommerce",
+    featured: false,
+    Framework1: "Vitejs",
     Framework2: "Bootstrap",
-    Framework3: "Livewire",
-    url: "https://github.com/IndraRP/ScanLogistik",
+    Framework3: "Javascript",
+    url: "https://github.com/IndraRP/FRIENDCHISE_TA",
+  },
+  {
+    title: "Personal Developer Portfolio",
+    description:
+      "High-performance developer portfolio featuring 3D WebGL Globe, Aceternity UI animations, and PWA capabilities.",
+    category: "Frontend",
+    previewType: "landing",
+    featured: false,
+    Framework1: "React",
+    Framework2: "Tailwind",
+    Framework3: "PWA",
+    url: "https://indrarp.github.io/webprofile/",
+  },
+  {
+    title: "Personal Website Mahes",
+    description:
+      "Custom-tailored personal branding landing page with smooth scroll transitions and responsive showcase sections.",
+    category: "Frontend",
+    previewType: "landing",
+    featured: false,
+    Framework1: "React",
+    Framework2: "Tailwind",
+    Framework3: "Javascript",
+    url: "https://indrarp.github.io/mahesweb/",
+  },
+  {
+    title: "Personal Website Nur Ardiansah",
+    description:
+      "Sleek modern portfolio website crafted with interactive UI components, project gallery, and fast performance.",
+    category: "Frontend",
+    previewType: "landing",
+    featured: false,
+    Framework1: "React",
+    Framework2: "Tailwind",
+    Framework3: "Javascript",
+    url: "https://indrarp.github.io/NurArdiansah/",
   },
 ];
 
